@@ -1,0 +1,13 @@
+{
+  "name": "babel-plugin-stylus-basic",
+  "author": "",
+  "description": "",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "dependencies": {
+    "babel-core": "^6.24.1",
+    "jeet": "^7.1.0",
+    "rupture": "^0.6.2",
+    "stylus": "^0.54.5"
+  }
+}
