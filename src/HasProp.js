@@ -7,6 +7,7 @@ HasProp = function (obj, path) {
   var tempObj = Object.create(obj)
   for (let i = 0; i < parts.length; i++) {
     // If this part exists on our object
+    if (tempObj === null) { return false }
     if (tempObj.hasOwnProperty(parts[i])) {
       // Prepare to check the next part
       tempObj = tempObj[parts[i]]
@@ -26,6 +27,7 @@ HasPropEq = function (obj, path, value) {
   var tempObj = Object.assign({}, obj)
   for (let i = 0; i < parts.length; i++) {
     // If this part exists on our object
+    if (tempObj === null) { return false }
     if (tempObj.hasOwnProperty(parts[i])) {
       // Prepare to check the next part
       tempObj = tempObj[parts[i]]

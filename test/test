@@ -16,7 +16,11 @@ files.forEach((fileName) => {
     let src = data.toString()
 
     // use our plugin to transform the source
-    let out = babel.transform(src, { plugins: [convert] })
+    let out = babel.transform(src, {
+      plugins: [
+        [convert, { test: true }]
+      ]
+    })
 
     if (fileName === 'one.js') {
       let r = fs.readFileSync('./dist/one.js', 'utf8')

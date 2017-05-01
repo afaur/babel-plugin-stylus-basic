@@ -1,4 +1,5 @@
 const fs            = require('fs')
+const { normalize } = require('path')
 const stylus        = require('stylus')
 const rupture       = require('rupture')
 const jeet          = require('jeet')
@@ -17,8 +18,16 @@ ImportDeclaration = function (t, path, state) {
       // Get the filename
       const file = node.source.value
 
+      // Since this file is installed in node_modules
+      var pathToFile = normalize(`${__dirname}/../../../${file}`)
+
+      // If test option set then use plugin test folder
+      if ( HasPropEq(state, 'opts.test', true) ) {
+        pathToFile = normalize(`${__dirname}/../test/${file}`)
+      }
+
       // Read the data
-      const data = fs.readFileSync(file, 'utf8')
+      const data = fs.readFileSync(pathToFile, 'utf8')
 
       // Convert the contents
       const css  = stylus(data)
@@ -55,8 +64,16 @@ VariableDeclaration = function (t, path, state) {
       // Get the filename
       const file = node.declarations[0].init.value
 
+      // Since this file is installed in node_modules
+      var pathToFile = normalize(`${__dirname}/../../../${file}`)
+
+      // If test option set then use plugin test folder
+      if ( HasPropEq(state, 'opts.test', true) ) {
+        pathToFile = normalize(`${__dirname}/../test/${file}`)
+      }
+
       // Read the data
-      const data = fs.readFileSync(`${__dirname}/../../../${file}`, 'utf8')
+      const data = fs.readFileSync(pathToFile, 'utf8')
 
       // Convert the contents
       const css  = stylus(data)
